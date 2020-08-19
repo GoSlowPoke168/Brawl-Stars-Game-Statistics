@@ -17,6 +17,7 @@ class BrawlerInfoViewController: UIViewController {
     var brawlerStarPowers: [String] = []
     var brawlerGadgets: [String] = []
     var brawlerID = ""
+    var activityIndicatorView = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class BrawlerInfoViewController: UIViewController {
     }
 
     func getInfo(_ urlEndpoint: String) {
+        activityIndicatorView.showActivityIndicator(view: view)
         let apiToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjM0YTM1NjA4LTljM2EtNDhiYi04ZmNhLWZlNDBhYWVlODIwNiIsImlhdCI6MTU5NjUwNzUyOSwic3ViIjoiZGV2ZWxvcGVyLzQ5MzVhYjAyLTY4YzEtMzQ3YS1kOTllLWNkOGQ0ODI2NDg5ZiIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTUyLjIwOC43LjIyOCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.qKN5_5v4xyW1Xq9xnA_7M9zC3LNN-c2eF-EtZuJV0kcWjtsrYX5gck5ur3YsoCcxdQSyeOFD-VMGHQ2XGWW88A"
 
         if let url = URL(string: "https://api.brawlstars.com/v1/\(urlEndpoint)") {
@@ -39,6 +41,7 @@ class BrawlerInfoViewController: UIViewController {
             request.addValue("application/json", forHTTPHeaderField: "Accept")
 
             URLSession.shared.dataTask(with: request) { (data, response, error) in
+                self.activityIndicatorView.hideActivityIndicator()
                 if error != nil {
                     print(error!)
                 } else {

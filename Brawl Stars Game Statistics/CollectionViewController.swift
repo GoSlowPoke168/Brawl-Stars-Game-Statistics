@@ -13,11 +13,15 @@ class CollectionViewController: UICollectionViewController {
     
     @IBOutlet var collectionViewOutlet: UICollectionView!
     
-    var brawlers: [String] = []
+    var brawlerIDs: [String] = []
+    var brawlerNames: [String] = []
+    var selectedBrawlerID: String = ""
     
     override func viewDidAppear(_ animated: Bool) {
 //        BrawlStars.getData("brawlers")
+        brawlerIDs = []
         getData("brawlers")
+        selectedBrawlerID = ""
     }
     
     override func viewDidLoad() {
@@ -32,26 +36,29 @@ class CollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToBrawlerInfoVC" {
             guard let vc = segue.destination as? BrawlerInfoViewController else {return}
+            vc.brawlerID = selectedBrawlerID
         }
     }
 
     // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return brawlers.count
+        return brawlerIDs.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = UICollectionViewCell()
         if let brawlerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionViewCell {
-            brawlerCell.configure(with: brawlers[indexPath.row])
+//            brawlerCell.configure(with: brawlerIDs[indexPath.row])
+            brawlerCell.configure(with: brawlerNames[indexPath.row])
             cell = brawlerCell
         }
         return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        print("Selected Brawler: \(brawlers[indexPath.row])")
+        print("Selected Brawler: \(brawlerIDs[indexPath.row])")
+        selectedBrawlerID = brawlerIDs[indexPath.row]
         performSegue(withIdentifier: "goToBrawlerInfoVC", sender: self)
         return true
     }
@@ -74,30 +81,16 @@ class CollectionViewController: UICollectionViewController {
                     guard let data = data else {return}
                     do {
                         let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as AnyObject
-//                        print(jsonResult)
                         if let items = jsonResult["items"] as? NSArray {
                             for item in items as [AnyObject] {
                                 if let name = item["name"] {
-                                    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                                    print("Brawler Name: \(name!)")
-                                    self.brawlers.append(name as! String)
-                                    if let brawlerID = item["id"] {
-                                        print("Brawler ID: \(brawlerID!)")
-                                    }
+//                                    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+//                                    print("Brawler Name: \(name!)")
+                                    self.brawlerNames.append("\(name ?? "")")
                                 }
-                                if let gadgets = item["gadgets"] as? [[String:Any]]{
-//                                    print(gadgets)
-                                    gadgets.forEach { gadget in
-//                                        print(gadget["id"]!)
-                                        print("Gadget: \(gadget["name"]!)")
-                                    }
-                                }
-                                if let starPowers = item["starPowers"] as? [[String:Any]] {
-//                                    print(starPowers)
-                                    starPowers.forEach { starPower in
-//                                        print(starPower["id"]!)
-                                        print("Star Power: \(starPower["name"]!)")
-                                    }
+                                if let brawlerID = item["id"] {
+//                                    print("Brawler ID: \(brawlerID!)")
+                                    self.brawlerIDs.append("\(brawlerID ?? "")")
                                 }
                             }
                         }

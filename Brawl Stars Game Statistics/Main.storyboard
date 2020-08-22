@@ -95,7 +95,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="g5c-Bs-8sg" customClass="CollectionViewCell" customModule="Brawl_Stars_Game_Statistics" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Cell" id="g5c-Bs-8sg" customClass="CollectionViewCell" customModule="Brawl_Stars_Game_Statistics" customModuleProvider="target">
                                 <rect key="frame" x="45" y="25" width="145" height="145"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Xpm-nl-84L">
@@ -115,6 +115,7 @@
                                         <constraint firstItem="SHe-Kt-uQL" firstAttribute="centerX" secondItem="Xpm-nl-84L" secondAttribute="centerX" id="p9o-jq-h6g"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <viewLayoutGuide key="safeArea" id="h5H-lX-7JB"/>
                                 <size key="customSize" width="145" height="145"/>
                                 <connections>
                                     <outlet property="brawlerNameLabel" destination="SHe-Kt-uQL" id="CaM-gD-afN"/>
@@ -137,7 +138,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="pgJ-FN-cvi"/>
                     <navigationItem key="navigationItem" title="Brawlers" id="MqJ-MV-gRU"/>
                     <connections>
-                        <outlet property="collectionViewOutlet" destination="evz-UP-2tw" id="kFR-TW-EYO"/>
+                        <outlet property="collectionViewOutlet" destination="evz-UP-2tw" id="Bq1-dc-dJK"/>
                         <segue destination="4OU-yL-3Sy" kind="show" identifier="goToBrawlerInfoVC" id="mbb-WD-pV1"/>
                     </connections>
                 </collectionViewController>
@@ -153,29 +154,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBx-SX-qlt">
-                                <rect key="frame" x="20" y="152" width="374" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brawlstarsBackground" translatesAutoresizingMaskIntoConstraints="NO" id="WEy-1f-DZ3">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBx-SX-qlt">
+                                <rect key="frame" x="20" y="152" width="374" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kaW-Ze-Zof"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jk-do-2ee">
-                                <rect key="frame" x="20" y="210" width="374" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jk-do-2ee">
+                                <rect key="frame" x="20" y="214" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Z9f-1A-VTb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VB9-VI-1CU">
-                                <rect key="frame" x="20" y="303" width="374" height="79"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VB9-VI-1CU">
+                                <rect key="frame" x="20" y="309" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="zdC-dz-8la"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BBx-SX-qlt" firstAttribute="width" secondItem="8nl-l8-892" secondAttribute="width" multiplier="0.903382" id="4bH-0A-bgH"/>
+                            <constraint firstItem="WEy-1f-DZ3" firstAttribute="bottom" secondItem="e9m-d8-LbB" secondAttribute="bottom" id="72P-op-inJ"/>
+                            <constraint firstItem="VB9-VI-1CU" firstAttribute="width" secondItem="8nl-l8-892" secondAttribute="width" multiplier="0.903382" id="Ez9-CK-fyx"/>
+                            <constraint firstItem="WEy-1f-DZ3" firstAttribute="trailing" secondItem="e9m-d8-LbB" secondAttribute="trailing" id="Mzr-dR-NR9"/>
+                            <constraint firstItem="WEy-1f-DZ3" firstAttribute="top" secondItem="e9m-d8-LbB" secondAttribute="top" id="Q7x-8t-ltD"/>
+                            <constraint firstItem="BBx-SX-qlt" firstAttribute="centerX" secondItem="e9m-d8-LbB" secondAttribute="centerX" id="T2M-n3-CU1"/>
+                            <constraint firstItem="BBx-SX-qlt" firstAttribute="top" secondItem="e9m-d8-LbB" secondAttribute="top" constant="64" id="TES-4g-rCu"/>
+                            <constraint firstItem="VB9-VI-1CU" firstAttribute="top" secondItem="2jk-do-2ee" secondAttribute="bottom" constant="45" id="YCy-lE-WRY"/>
+                            <constraint firstItem="2jk-do-2ee" firstAttribute="top" secondItem="BBx-SX-qlt" secondAttribute="bottom" constant="22" id="hIq-zV-Fz0"/>
+                            <constraint firstItem="WEy-1f-DZ3" firstAttribute="leading" secondItem="e9m-d8-LbB" secondAttribute="leading" id="j2Q-gq-bVi"/>
+                            <constraint firstItem="VB9-VI-1CU" firstAttribute="centerX" secondItem="e9m-d8-LbB" secondAttribute="centerX" id="kfd-bJ-OZ4"/>
+                            <constraint firstItem="2jk-do-2ee" firstAttribute="centerX" secondItem="BBx-SX-qlt" secondAttribute="centerX" id="pQE-Ng-A3X"/>
+                            <constraint firstItem="2jk-do-2ee" firstAttribute="width" secondItem="BBx-SX-qlt" secondAttribute="width" id="sJ9-EM-bO8"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="e9m-d8-LbB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Info" id="Wcz-0I-IHf"/>

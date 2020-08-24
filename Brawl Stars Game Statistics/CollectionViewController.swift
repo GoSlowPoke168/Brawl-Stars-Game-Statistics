@@ -37,19 +37,12 @@ class CollectionViewController: UICollectionViewController {
     var selectedBrawlerName: String = ""
     var selectedBrawlerGadgets: [String] = []
     var selectedBrawlerStarPowers: [String] = []
-    
     var activityIndicatorView = ActivityIndicator()
-        
-    override func viewDidAppear(_ animated: Bool) {
-//        BrawlStars.getData("brawlers")
-        getNames("brawlers")
-        brawlerNames = []
-        selectedBrawlerGadgets = []
-        selectedBrawlerStarPowers = []
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        BrawlStars.getData("brawlers")
+        getNames("brawlers")
     }
 
     // MARK: - Navigation
@@ -130,6 +123,8 @@ class CollectionViewController: UICollectionViewController {
     
     func getBrawlerInfo(_ urlEndpoint: String, _ selectedBrawler: Int) {
         activityIndicatorView.showActivityIndicator(view: view)
+        selectedBrawlerGadgets = []
+        selectedBrawlerStarPowers = []
         let apiToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjM0YTM1NjA4LTljM2EtNDhiYi04ZmNhLWZlNDBhYWVlODIwNiIsImlhdCI6MTU5NjUwNzUyOSwic3ViIjoiZGV2ZWxvcGVyLzQ5MzVhYjAyLTY4YzEtMzQ3YS1kOTllLWNkOGQ0ODI2NDg5ZiIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTUyLjIwOC43LjIyOCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.qKN5_5v4xyW1Xq9xnA_7M9zC3LNN-c2eF-EtZuJV0kcWjtsrYX5gck5ur3YsoCcxdQSyeOFD-VMGHQ2XGWW88A"
 
         if let url = URL(string: "https://api.brawlstars.com/v1/\(urlEndpoint)") {

@@ -19,10 +19,6 @@ class BrawlerInfoViewController: UIViewController {
 
     var activityIndicatorView = ActivityIndicator()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         activityIndicatorView.showActivityIndicator(view: view)
         brawlerNameLabel.text = brawlerName

@@ -8,32 +8,13 @@
 
 import UIKit
 
-struct Items: Codable {
-    let items: [Item]
-}
-
-struct Item: Codable {
-    let id: Int?
-    let name: String?
-    let gadgets: [Gadget]
-    let starPowers: [StarPowers]
-}
-
-struct Gadget: Codable {
-    let id: Int?
-    let name: String?
-}
-
-struct StarPowers: Codable {
-    let id: Int?
-    let name: String?
-}
-
-class CollectionViewController: UICollectionViewController {
+class CollectionViewController: UICollectionViewController, BrawlerItemsProtocol {
     
     @IBOutlet var collectionViewOutlet: UICollectionView!
     
     var jsonItems: [Item] = []
+    var selectedIndex: Int = 0
+    
     var brawlerNames: [String] = []
     var selectedBrawlerName: String = ""
     var selectedBrawlerGadgets: [String] = []
@@ -42,8 +23,8 @@ class CollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        BrawlStars.getData("brawlers")
-        getNames("brawlers")
+//        getNames("brawlers")
+        BrawlerAPI.getItems("brawlers", sender: self)
     }
 
     // MARK: - Navigation
@@ -51,75 +32,91 @@ class CollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToBrawlerInfoVC" {
             guard let vc = segue.destination as? BrawlerInfoViewController else {return}
-            vc.brawlerName = selectedBrawlerName
-            vc.brawlerGadgets = selectedBrawlerGadgets
-            vc.brawlerStarPowers = selectedBrawlerStarPowers
+            vc.brawlerName = jsonItems[selectedIndex].name ?? ""
+            vc.brawlerGadgets = jsonItems[selectedIndex].gadgets
+            vc.brawlerStarPowers = jsonItems[selectedIndex].starPowers
         }
     }
 
     // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return brawlerNames.count
+//        return brawlerNames.count
+        return jsonItems.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = UICollectionViewCell()
         if let brawlerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionViewCell {
-            brawlerCell.configure(with: brawlerNames[indexPath.row])
+//            brawlerCell.configure(with: brawlerNames[indexPath.row])
+            brawlerCell.configure(with: jsonItems[indexPath.row].name ?? "")
             cell = brawlerCell
         }
         return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let selectedBrawler = indexPath.row
-        print("Selected Brawler: \(brawlerNames[indexPath.row])")
-        selectedBrawlerName = brawlerNames[indexPath.row]
-        getBrawlerInfo(selectedBrawler)
+        selectedIndex = indexPath.row
+//        let selectedBrawler = indexPath.row
+        print("Selected Brawler: \(jsonItems[indexPath.row].name ?? "")")
+//        selectedBrawlerName = brawlerNames[indexPath.row]
+//        getBrawlerInfo(selectedBrawler)
+        DispatchQueue.main.async {
+            //self.collectionViewOutlet.reloadData()
+            self.performSegue(withIdentifier: "goToBrawlerInfoVC", sender: self)
+        }
         return true
     }
     
-    // MARK: - GetNames
+    // MARK: - BrawlerAPI Delegate Function
     
-    func getNames(_ urlEndpoint: String) {
-        activityIndicatorView.showActivityIndicator(view: view)
-        let apiToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjM0YTM1NjA4LTljM2EtNDhiYi04ZmNhLWZlNDBhYWVlODIwNiIsImlhdCI6MTU5NjUwNzUyOSwic3ViIjoiZGV2ZWxvcGVyLzQ5MzVhYjAyLTY4YzEtMzQ3YS1kOTllLWNkOGQ0ODI2NDg5ZiIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTUyLjIwOC43LjIyOCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.qKN5_5v4xyW1Xq9xnA_7M9zC3LNN-c2eF-EtZuJV0kcWjtsrYX5gck5ur3YsoCcxdQSyeOFD-VMGHQ2XGWW88A"
-
-        if let url = URL(string: "https://api.brawlstars.com/v1/\(urlEndpoint)") {
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.addValue("Bearer \(apiToken)", forHTTPHeaderField: "authorization")
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                self.activityIndicatorView.hideActivityIndicator()
-                if error != nil {
-                    print(error!)
-                } else {
-                    guard let data = data else {return}
-                    let decoder = JSONDecoder()
-                    do {
-                        let items = try decoder.decode(Items.self, from: data)
-                        self.jsonItems = items.items
-                        for i in items.items {
-                            if let brawlerName = i.name {
-//                                print(brawlerName)
-                                self.brawlerNames.append(brawlerName)
-                            }
-                        }
-                    } catch {
-                        print("JSON processing failed: \(error.localizedDescription)")
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.collectionViewOutlet.reloadData()
-                }
-            }.resume()
-        } else {
-            print("Something went wrong")
+    func BrawlerItemsReceivedAndParsed(_ itemsArray: [Item]) {
+        jsonItems = itemsArray
+        print(jsonItems.count)
+        DispatchQueue.main.async {
+             self.collectionViewOutlet.reloadData()
         }
+        
     }
+    
+//    func getNames(_ urlEndpoint: String) {
+//        activityIndicatorView.showActivityIndicator(view: view)
+//        let apiToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFkOTdhNmMwLTZmMGMtNDkwOS1iZTk1LTI2Yjg2ZDdhMjI3ZCIsImlhdCI6MTU5ODU4MjI1OSwic3ViIjoiZGV2ZWxvcGVyLzQ5MzVhYjAyLTY4YzEtMzQ3YS1kOTllLWNkOGQ0ODI2NDg5ZiIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiNzEuNTguNDEuMjI0Il0sInR5cGUiOiJjbGllbnQifV19.pXQaNVR7y-2jdTP2TXdRMhh1bbzlDxsXj1SxGLF2gQQ8vSNY3GV5NNUrEycnPljL_bCvC7Mr95MRXNfldmsB6w"
+//
+//        if let url = URL(string: "https://api.brawlstars.com/v1/\(urlEndpoint)") {
+//            var request = URLRequest(url: url)
+//            request.httpMethod = "GET"
+//            request.addValue("Bearer \(apiToken)", forHTTPHeaderField: "authorization")
+//            request.addValue("application/json", forHTTPHeaderField: "Accept")
+//
+//            URLSession.shared.dataTask(with: request) { (data, response, error) in
+//                self.activityIndicatorView.hideActivityIndicator()
+//                if error != nil {
+//                    print(error!)
+//                } else {
+//                    guard let data = data else {return}
+//                    let decoder = JSONDecoder()
+//                    do {
+//                        let items = try decoder.decode(Items.self, from: data)
+//                        self.jsonItems = items.items
+//                        for i in items.items {
+//                            if let brawlerName = i.name {
+////                                print(brawlerName)
+//                                self.brawlerNames.append(brawlerName)
+//                            }
+//                        }
+//                    } catch {
+//                        print("JSON processing failed: \(error.localizedDescription)")
+//                    }
+//                }
+//                DispatchQueue.main.async {
+//                    self.collectionViewOutlet.reloadData()
+//                }
+//            }.resume()
+//        } else {
+//            print("Something went wrong")
+//        }
+//    }
     
     // MARK: - GetBrawlerInfo
     

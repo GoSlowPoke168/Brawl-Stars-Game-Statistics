@@ -22,6 +22,7 @@
 		3F2F575224EB448D003D44D6 /* BrawlStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2F574E24EB448D003D44D6 /* BrawlStars.swift */; };
 		3F2F575324EB448D003D44D6 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2F574F24EB448D003D44D6 /* CollectionViewCell.swift */; };
 		3F2F575724ECC9EA003D44D6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2F575624ECC9EA003D44D6 /* ActivityIndicator.swift */; };
+		3F54761624F44BEB00D56549 /* BrawlerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F54761524F44BEB00D56549 /* BrawlerAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		3F2F574E24EB448D003D44D6 /* BrawlStars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrawlStars.swift; sourceTree = "<group>"; };
 		3F2F574F24EB448D003D44D6 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		3F2F575624ECC9EA003D44D6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		3F54761524F44BEB00D56549 /* BrawlerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlerAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				3F2F575624ECC9EA003D44D6 /* ActivityIndicator.swift */,
 				3F2F573124EB441B003D44D6 /* FirstViewController.swift */,
 				3F2F573324EB441B003D44D6 /* SecondViewController.swift */,
+				3F54761524F44BEB00D56549 /* BrawlerAPI.swift */,
 				3F2F574C24EB448D003D44D6 /* CollectionViewController.swift */,
 				3F2F574F24EB448D003D44D6 /* CollectionViewCell.swift */,
 				3F2F574D24EB448D003D44D6 /* BrawlerInfoViewController.swift */,
@@ -173,6 +176,7 @@
 				3F2F573424EB441B003D44D6 /* SecondViewController.swift in Sources */,
 				3F2F573224EB441B003D44D6 /* FirstViewController.swift in Sources */,
 				3F2F573A24EB441B003D44D6 /* Brawl_Stars_Game_Statistics.xcdatamodeld in Sources */,
+				3F54761624F44BEB00D56549 /* BrawlerAPI.swift in Sources */,
 				3F2F575724ECC9EA003D44D6 /* ActivityIndicator.swift in Sources */,
 				3F2F572E24EB441B003D44D6 /* AppDelegate.swift in Sources */,
 				3F2F573024EB441B003D44D6 /* SceneDelegate.swift in Sources */,

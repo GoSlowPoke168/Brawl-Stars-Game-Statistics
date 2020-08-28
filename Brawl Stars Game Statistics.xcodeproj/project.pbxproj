@@ -19,7 +19,6 @@
 		3F2F574B24EB4476003D44D6 /* brawlerID.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F2F574924EB4476003D44D6 /* brawlerID.json */; };
 		3F2F575024EB448D003D44D6 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2F574C24EB448D003D44D6 /* CollectionViewController.swift */; };
 		3F2F575124EB448D003D44D6 /* BrawlerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2F574D24EB448D003D44D6 /* BrawlerInfoViewController.swift */; };
-		3F2F575224EB448D003D44D6 /* BrawlStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2F574E24EB448D003D44D6 /* BrawlStars.swift */; };
 		3F2F575324EB448D003D44D6 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2F574F24EB448D003D44D6 /* CollectionViewCell.swift */; };
 		3F2F575724ECC9EA003D44D6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2F575624ECC9EA003D44D6 /* ActivityIndicator.swift */; };
 		3F54761624F44BEB00D56549 /* BrawlerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F54761524F44BEB00D56549 /* BrawlerAPI.swift */; };
@@ -40,7 +39,6 @@
 		3F2F574924EB4476003D44D6 /* brawlerID.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brawlerID.json; sourceTree = "<group>"; };
 		3F2F574C24EB448D003D44D6 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		3F2F574D24EB448D003D44D6 /* BrawlerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrawlerInfoViewController.swift; sourceTree = "<group>"; };
-		3F2F574E24EB448D003D44D6 /* BrawlStars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrawlStars.swift; sourceTree = "<group>"; };
 		3F2F574F24EB448D003D44D6 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		3F2F575624ECC9EA003D44D6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		3F54761524F44BEB00D56549 /* BrawlerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlerAPI.swift; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 			children = (
 				3F2F572D24EB441B003D44D6 /* AppDelegate.swift */,
 				3F2F572F24EB441B003D44D6 /* SceneDelegate.swift */,
-				3F2F574E24EB448D003D44D6 /* BrawlStars.swift */,
 				3F2F575624ECC9EA003D44D6 /* ActivityIndicator.swift */,
 				3F2F573124EB441B003D44D6 /* FirstViewController.swift */,
 				3F2F573324EB441B003D44D6 /* SecondViewController.swift */,
@@ -170,7 +167,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F2F575224EB448D003D44D6 /* BrawlStars.swift in Sources */,
 				3F2F575024EB448D003D44D6 /* CollectionViewController.swift in Sources */,
 				3F2F575324EB448D003D44D6 /* CollectionViewCell.swift in Sources */,
 				3F2F573424EB441B003D44D6 /* SecondViewController.swift in Sources */,
